@@ -26,7 +26,7 @@ apiClient.interceptors.request.use(
 
 // API functions for User actions
 const loginUser = (data: { email: string; password: string }) => {
-	return apiClient.post("/users/login", data);
+	return apiClient.post("/user/login", data);
 };
 
 const registerUser = (data: {
@@ -34,22 +34,53 @@ const registerUser = (data: {
 	username: string;
 	password: string;
 }) => {
-	return apiClient.post("/users/register", data);
+	return apiClient.post("/user/register", data);
 };
 
 const logoutUser = () => {
-	return apiClient.get("/users/logout");
+	return apiClient.get("/user/logout");
 };
 
 const selfUser = () => {
-	return apiClient.get("/users/self");
+	return apiClient.get("/user/self");
 };
 
+const forgotPasswordRequest = (email: string) => {
+	return apiClient.post("/user/forgot-password-request", { email });
+};
+
+const verifyOTPRequest = (data: { email: string; otp: string }) => {
+	return apiClient.post("/user/verify-otp", data);
+};
+
+const resetPasswordRequest = (data: {
+	newPassword: string;
+	confirmPassword: string;
+	token: string;
+}) => {
+	return apiClient.post(`/user/forgot-password/${data.token}`, {
+		newPassword: data.newPassword,
+		confirmPassword: data.confirmPassword,
+	});
+};
+
+const resendEmailVerificationRequest = (email: string) => {
+	return apiClient.post(`/user/resend-verify-email`, { email });
+};
+
+const verifyEmailRequest = (token: string) => {
+	return apiClient.post(`/user/verify-email/${token}`);
+};
 export {
 	apiClient,
 	loginUser,
 	registerUser,
 	logoutUser,
 	selfUser,
+	forgotPasswordRequest,
+	verifyOTPRequest,
+	resetPasswordRequest,
+	resendEmailVerificationRequest,
+	verifyEmailRequest,
 	// Add other API functions as needed for other endpoints
 };

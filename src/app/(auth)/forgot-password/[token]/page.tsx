@@ -1,17 +1,12 @@
-import { Metadata } from "next";
+"use client";
+
+import { ResetPasswordForm } from "@/components/auth/forgot-password-form";
 import { GalleryVerticalEnd } from "lucide-react";
-import { SignupForm } from "@/components/auth/sign-form";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-	title: "Sign up - SLYIX APPAREL",
-	description:
-		"Sign up to your SLYIX APPAREL account to explore the latest fashion trends and manage your profile.",
-};
-
-export default function SignupPage() {
+export default function EmailVerificationLoadingPage() {
 	return (
-		<div className="w-full min-h-svh ">
+		<div className="w-full min-h-screen">
 			<div className="flex flex-col gap-4 p-6 md:p-10">
 				<div className="flex justify-center gap-2 md:justify-start">
 					<Link
@@ -25,8 +20,8 @@ export default function SignupPage() {
 					</Link>
 				</div>
 				<div className="flex flex-1 items-center justify-center">
-					<div className="w-full max-w-md sm:mt-20 mt-14 mb-10">
-						<SignupForm />
+					<div className="w-full max-w-md sm:mt-20 mt-14">
+						<ResetPasswordForm />
 					</div>
 				</div>
 			</div>

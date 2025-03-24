@@ -1,7 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react";
-import { LoginForm } from "@/components/auth/login-form";
 import Link from "next/link";
 import { Metadata } from "next";
+import { LoginForm } from "@/components/auth/login-form";
 
 // Metadata API for setting title and description
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function LoginPage() {
 						<div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
 							<GalleryVerticalEnd className="size-4" />
 						</div>
-						SLYIX APPAREL .
+						SLYIX APPAREL
 					</Link>
 				</div>
 				<div className="flex flex-1 items-center justify-center">

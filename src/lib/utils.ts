@@ -32,13 +32,13 @@ export const requestHandler = async (
 		}
 	} catch (error: any) {
 		if (error.response?.status === 422) {
-			const errorObject = error.response.data.errors[0];
+			const errorMessage = error.response.data.errors[0].message;
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const [_, value] = Object.entries(errorObject)[0];
-			onError(value as string);
+
+			onError(errorMessage as string);
 		} else if (401 == error?.response.status || error?.response.status == 403) {
 			LocalStorage.clear();
-			if (isBrowser) window.location.href = "/auth/login"; // Redirect to login page
+			if (isBrowser) window.location.href = "/login"; // Redirect to login page
 		} else {
 			onError(error.response?.data?.message || "Something went wrong");
 		}

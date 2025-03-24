@@ -1,15 +1,53 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/lib/schemas/login";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/store/hooks";
+import { login as loginHandler } from "@/features/thunk/authThunk";
+
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export function LoginForm({
 	className,
 	...props
 }: React.ComponentPropsWithoutRef<"form">) {
+	const [loading, setLoading] = useState(false);
+
+	const router = useRouter();
+	const dispatch = useAppDispatch();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<LoginFormData>({
+		resolver: zodResolver(loginSchema),
+	});
+
+	const onSubmit = async (data: LoginFormData) => {
+		setLoading(true);
+		const result = await dispatch(loginHandler(data));
+		setLoading(false);
+		// reset the form
+		reset();
+		if (loginHandler.fulfilled.match(result)) {
+			// Redirect to the login page if registration is successful
+			router.push("/");
+		}
+	};
+
 	return (
 		<form
+			onSubmit={handleSubmit(onSubmit)}
 			className={cn("flex flex-col gap-6", className)}
 			{...props}
 		>
@@ -25,15 +63,16 @@ export function LoginForm({
 					<Input
 						id="email"
 						type="email"
-						placeholder="jayash@example.com"
-						required
+						placeholder="joe@example.com"
+						{...register("email")}
+						error={errors.email?.message}
 					/>
 				</div>
 				<div className="grid gap-2">
 					<div className="flex items-center">
 						<Label htmlFor="password">Password</Label>
 						<Link
-							href="#"
+							href="/forgot-password"
 							className="ml-auto text-sm underline-offset-4 hover:underline"
 						>
 							Forgot your password?
@@ -42,12 +81,16 @@ export function LoginForm({
 					<Input
 						id="password"
 						type="password"
-						required
+						placeholder="********"
+						{...register("password")}
+						error={errors.password?.message}
 					/>
 				</div>
 				<Button
 					type="submit"
 					className="w-full"
+					disabled={loading}
+					isLoading={loading}
 				>
 					Login
 				</Button>
@@ -64,6 +107,7 @@ export function LoginForm({
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
+						className="h-5 w-5 mr-2"
 					>
 						<path
 							d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"

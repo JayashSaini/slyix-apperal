@@ -1,15 +1,53 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { registerSchema } from "@/lib/schemas/sign-up";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useState } from "react";
+import { register as registerHandler } from "@/features/thunk/authThunk";
+
+import { useAppDispatch } from "@/store/hooks";
+import { useRouter } from "next/navigation";
+
+type RegisterSchemaData = z.infer<typeof registerSchema>;
 
 export function SignupForm({
 	className,
 	...props
 }: React.ComponentPropsWithoutRef<"form">) {
+	const [loading, setLoading] = useState(false);
+	const router = useRouter();
+	const dispatch = useAppDispatch();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<RegisterSchemaData>({
+		resolver: zodResolver(registerSchema),
+	});
+
+	const onSubmit = async (data: RegisterSchemaData) => {
+		setLoading(true);
+		const result = await dispatch(registerHandler(data));
+		setLoading(false);
+		// reset the form
+		reset();
+		if (registerHandler.fulfilled.match(result)) {
+			// Redirect to the login page if registration is successful
+			router.push("/email-verification");
+		}
+	};
+
 	return (
 		<form
+			onSubmit={handleSubmit(onSubmit)}
 			className={cn("flex flex-col gap-6", className)}
 			{...props}
 		>
@@ -25,18 +63,26 @@ export function SignupForm({
 					<Input
 						id="username"
 						type="text"
-						placeholder="jayash"
-						required
+						placeholder="joe"
+						{...register("username")}
+						disabled={loading}
 					/>
+					{errors.username && (
+						<p className="text-red-500 text-sm">{errors.username.message}</p>
+					)}
 				</div>
 				<div className="grid gap-2">
 					<Label htmlFor="email">Email</Label>
 					<Input
 						id="email"
 						type="email"
-						placeholder="jayash@example.com"
-						required
+						placeholder="joe@example.com"
+						{...register("email")}
+						disabled={loading}
 					/>
+					{errors.email && (
+						<p className="text-red-500 text-sm">{errors.email.message}</p>
+					)}
 				</div>
 				<div className="grid gap-2">
 					<Label htmlFor="password">Password</Label>
@@ -44,12 +90,18 @@ export function SignupForm({
 						id="password"
 						type="password"
 						placeholder="********"
-						required
+						{...register("password")}
+						disabled={loading}
 					/>
+					{errors.password && (
+						<p className="text-red-500 text-sm">{errors.password.message}</p>
+					)}
 				</div>
 				<Button
 					type="submit"
 					className="w-full"
+					disabled={loading}
+					isLoading={loading}
 				>
 					Sign Up
 				</Button>
@@ -61,6 +113,7 @@ export function SignupForm({
 				<Button
 					variant="outline"
 					className="w-full"
+					disabled={loading}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +125,7 @@ export function SignupForm({
 							fill="currentColor"
 						/>
 					</svg>
-					Sign Up with Google
+					Login in with Google
 				</Button>
 			</div>
 			<div className="text-center text-sm">
