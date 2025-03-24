@@ -169,7 +169,7 @@
 
 :root {
 	--radius: 0.75rem;
-	--background: #f2f2f2;
+	--background: #ffffff;
 	--foreground: #2e2e2e;
 	--card: #fbfbfb;
 	--card-foreground: #2e2e2e;
@@ -184,7 +184,7 @@
 	--accent: #6f48c9;
 	--accent-foreground: #ffffff;
 	--destructive: #e57373;
-	--border: #b3b3b3;
+	--border: #d4d4d4;
 	--input: #eeeeee;
 	--ring: #6f48c9;
 	--sidebar: #f4f4f4;
@@ -221,4 +221,8 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+}
+
+.content-container {
+	@apply max-w-[1440px] w-full mx-auto px-6;
 }

@@ -3,6 +3,8 @@ import "./globals.css";
 import { ReduxProvider } from "@/features/provider";
 import { Toaster } from "@/components/common/toaster";
 import { ThemeProvider } from "@/components/common/theme";
+import Nav from "@/components/layout/nav";
+import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -33,7 +35,12 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					<Toaster>
-						<ReduxProvider>{children}</ReduxProvider>
+						<ReduxProvider>
+							<Nav />
+
+							{children}
+							<Footer />
+						</ReduxProvider>
 					</Toaster>
 				</ThemeProvider>
 			</body>
