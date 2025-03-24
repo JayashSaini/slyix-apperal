@@ -20,13 +20,14 @@ export default async function Footer() {
 	return (
 		<footer className="border-t border-border w-full">
 			<div className="content-container flex flex-col w-full">
-				<div className="flex flex-col gap-y-6 sm:flex-row items-start justify-between py-40">
+				<div className="flex flex-col gap-y-6 sm:flex-row items-start justify-between sm:py-40 py-24">
 					<div>
 						<Link
 							href="/"
-							className="text-lg text-foreground hover:text-muted-foreground uppercase"
+							className="sm:text-xl text-lg  text-foreground bowlby-one-sc-regular hover:text-muted-foreground uppercase"
+							data-testid="nav-store-link"
 						>
-							SLYIX Apparel
+							SLYIX APPAREL
 						</Link>
 					</div>
 					<div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
@@ -98,13 +99,13 @@ export default async function Footer() {
 						</div>
 					</div>
 				</div>
-				<div className="flex w-full mb-16 justify-between text-muted-foreground">
-					<h3 className="text-[15px]">
+				<div className="flex w-full  mb-14 justify-between text-muted-foreground gap-3">
+					<h3 className="text-sm">
 						© {new Date().getFullYear()} SLYIX Apparel. All rights reserved.
 					</h3>
 					<Link
 						href="/"
-						className="text-[15px] hover:underline"
+						className="text-sm hover:underline sm:flex hidden"
 					>
 						SLYIX APPAREL
 					</Link>

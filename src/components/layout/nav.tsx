@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default async function Nav() {
 	return (
-		<div className="sticky top-0 inset-x-0 z-50 group">
-			<header className="relative h-16 mx-auto border-b duration-200 bg-background border-border">
+		<div className="sticky top-0 inset-x-0 z-30 group">
+			<header className="relative py-4 mx-auto border-b duration-200 bg-[#fffffff3] dark:bg-[#000000ee]  border-border">
 				<nav className="content-container text-base text-foreground flex items-center justify-between w-full h-full ">
 					<div className="flex-1 basis-0 h-full flex items-center">
 						<div className="h-full">
@@ -18,7 +18,7 @@ export default async function Nav() {
 					<div className="flex items-center h-full">
 						<Link
 							href="/"
-							className="text-lg text-foreground hover:text-muted-foreground uppercase"
+							className="sm:text-2xl text-lg  text-foreground bowlby-one-sc-regular hover:text-muted-foreground uppercase"
 							data-testid="nav-store-link"
 						>
 							SLYIX APPAREL
@@ -29,7 +29,7 @@ export default async function Nav() {
 						<div className="hidden sm:flex items-center gap-x-6 h-full">
 							<Link
 								className="hover:text-muted-foreground"
-								href="/account"
+								href="/login"
 								data-testid="nav-account-link"
 							>
 								Account

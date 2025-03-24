@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap");
+
 /* @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -170,10 +172,10 @@
 :root {
 	--radius: 0.75rem;
 	--background: #ffffff;
-	--foreground: #2e2e2e;
+	--foreground: #2b2b2b;
 	--card: #fbfbfb;
 	--card-foreground: #2e2e2e;
-	--popover: #f7f7f7;
+	--popover: #f8f8f8ec;
 	--popover-foreground: #2e2e2e;
 	--primary: #7b5bff;
 	--primary-foreground: #ffffff;
@@ -184,11 +186,11 @@
 	--accent: #6f48c9;
 	--accent-foreground: #ffffff;
 	--destructive: #e57373;
-	--border: #d4d4d4;
+	--border: #e4e4e4;
 	--input: #eeeeee;
 	--ring: #6f48c9;
-	--sidebar: #f4f4f4;
-	--sidebar-foreground: #333333;
+	--sidebar: #eeeeeef6;
+	--sidebar-foreground: #303030;
 }
 
 .dark {
@@ -196,7 +198,7 @@
 	--foreground: #e0e0e0;
 	--card: #1a1a1a;
 	--card-foreground: #ffffff;
-	--popover: #1a1a1a;
+	--popover: #0e0e0eea;
 	--popover-foreground: #e0e0e0;
 	--primary: #bb86fc;
 	--primary-foreground: #ffffff;
@@ -207,10 +209,10 @@
 	--accent: #6200ee;
 	--accent-foreground: #ffffff;
 	--destructive: #cf6679;
-	--border: #444444;
+	--border: #1d1d1d;
 	--input: #333333;
 	--ring: #3700b3;
-	--sidebar: #121212;
+	--sidebar: #121212f1;
 	--sidebar-foreground: #e0e0e0;
 }
 
@@ -224,5 +226,17 @@
 }
 
 .content-container {
-	@apply max-w-[1440px] w-full mx-auto px-6;
+	@apply max-w-[1440px] w-full mx-auto px-3;
+}
+
+@media (min-width: 650px) {
+	.content-container {
+		@apply px-6;
+	}
+}
+
+.bowlby-one-sc-regular {
+	font-family: "Bowlby One SC", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
