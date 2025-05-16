@@ -17,8 +17,8 @@ export function ThemeProvider({
 	useEffect(() => {
 		const storedTheme = localStorage.getItem("theme");
 		if (!storedTheme) {
-			setTheme("system");
-			localStorage.setItem("theme", "system");
+			setTheme("light");
+			localStorage.setItem("theme", "light");
 		} else if (storedTheme !== theme) {
 			setTheme(storedTheme);
 		}

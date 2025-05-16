@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function Nav() {
 	return (
 		<div className="sticky top-0 inset-x-0 z-30 group">
-			<header className="relative py-4 mx-auto border-b duration-200 bg-[#fffffff3] dark:bg-[#000000ee]  border-border">
+			<header className="relative py-4 mx-auto  duration-200 bg-[#ffffffd3]   ">
 				<nav className="content-container text-base text-foreground flex items-center justify-between w-full h-full ">
 					<div className="flex-1 basis-0 h-full flex items-center">
 						<div className="h-full">

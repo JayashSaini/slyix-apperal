@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/features/provider";
 import { Toaster } from "@/components/common/toaster";
-import { ThemeProvider } from "@/components/common/theme";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 
@@ -29,20 +28,14 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ThemeProvider
-					attribute="class"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<Toaster>
-						<ReduxProvider>
-							<Nav />
+				<Toaster>
+					<ReduxProvider>
+						<Nav />
 
-							{children}
-							<Footer />
-						</ReduxProvider>
-					</Toaster>
-				</ThemeProvider>
+						{children}
+						<Footer />
+					</ReduxProvider>
+				</Toaster>
 			</body>
 		</html>
 	);
